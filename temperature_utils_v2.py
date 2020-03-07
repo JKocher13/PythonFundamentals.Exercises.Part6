@@ -22,6 +22,14 @@ def convert_to_fahrenheit(celsius_temp: float) -> int:
     fahr = round(((celsius_temp*9/5)+32),2)
     return fahr
 
+def kelvin_to_celsius(celsius_temp: float) -> float:
+    """
+    Given a float representing a temperature in celsius returns the corresponding value in celsius
+    """
+    kelv = round(celsius_temp + 273.15,2)
+    return kelv
+
+
 def temperature_tuple(temperatures: Iterable, input_unit_of_measurement: str) -> Tuple[Tuple[float, float]]:
     """
     Given a tuple or a list of temperatures, this function returns a tuple of tuples.
@@ -36,11 +44,20 @@ def temperature_tuple(temperatures: Iterable, input_unit_of_measurement: str) ->
     if input_unit_of_measurement == "c":
         for i in temperatures:
             x = convert_to_fahrenheit(i)
-            lst.append((i,x))
+            y = kelvin_to_celsius(i)
+            lst.append((i,x,y))
     elif input_unit_of_measurement == "f":
         for i in temperatures:
             x = convert_to_celsius(i)
-            lst.append((i,x))
+            y = kelvin_to_celsius(x)
+            lst.append((i,x,y))
+    elif input_unit_of_measurement =="k":
+        for i in temperatures:
+            cel_from_k = i - 273.15
+            fahr_from_k = convert_to_fahrenheit(cel_from_k)
+            x= round(cel_from_k,2)
+            y= round(fahr_from_k)
+            lst.append((i, x, y)) 
     else:
         lst = ()  
     
